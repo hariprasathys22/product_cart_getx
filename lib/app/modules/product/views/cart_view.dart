@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_flutter/app/modules/product/controllers/cart_controller.dart';
+import 'package:getx_flutter/app/routes/app_pages.dart';
 
 class CartView extends StatelessWidget {
   final CartController cartController = Get.find<CartController>();
@@ -37,6 +38,12 @@ class CartView extends StatelessWidget {
               ),
             );
           }),
+          ElevatedButton(
+            child: Text("Prodceed to Checkout"),
+            onPressed: () {
+              Get.toNamed(Routes.CHECKOUT);
+            },
+          ),
         ],
       ),
     );

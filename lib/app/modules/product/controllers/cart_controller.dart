@@ -7,10 +7,12 @@ class CartController extends GetxController {
 
   void addToCart(ProductModel product) {
     cartItems.add(product);
+    calculateTotal();
   }
 
   void removeFromCart(ProductModel product) {
     cartItems.remove(product);
+    calculateTotal();
   }
 
   void calculateTotal() {

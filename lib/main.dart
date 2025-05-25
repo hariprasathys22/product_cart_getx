@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_flutter/app/modules/product/controllers/cart_controller.dart';
 import 'package:getx_flutter/app/routes/app_pages.dart';
 
 void main() {
+  Get.put(CartController());
   runApp(const MyApp());
 }
 

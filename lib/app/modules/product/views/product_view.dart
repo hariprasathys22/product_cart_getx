@@ -3,19 +3,26 @@ import 'package:get/get.dart';
 import 'package:getx_flutter/app/modules/product/controllers/product_controller.dart';
 
 class ProductView extends StatelessWidget {
-  final ProductController productController = Get.put(ProductController());
+  final ProductController productController = Get.find<ProductController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Product List")),
       body: Obx(() {
+        if (productController.isLoading.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        if (productController.errorMessage.isNotEmpty) {
+          return Center(child: Text(productController.errorMessage.value));
+        }
         return ListView.builder(
-          itemCount: productController.products.length,
+          itemCount: productController.productList.length,
           itemBuilder: (context, index) {
-            final product = productController.products[index];
+            final product = productController.productList[index];
             return ListTile(
-              title: Text(product.name),
+              title: Text(product.title),
               subtitle: Text('\$${product.price.toString()}'),
               onTap: () {
                 Get.toNamed('/product-details', arguments: product);

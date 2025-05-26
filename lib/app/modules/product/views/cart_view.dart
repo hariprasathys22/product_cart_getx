@@ -18,10 +18,24 @@ class CartView extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final item = cartController.cartItems[index];
                   return ListTile(
-                    title: Text(item.name),
+                    title: Text(item.title),
                     subtitle: Text('\$${item.price.toString()}'),
                     trailing: IconButton(
-                      onPressed: () => cartController.removeFromCart(item),
+                      onPressed: () {
+                        Get.defaultDialog(
+                          title: "Remove Item",
+                          middleText:
+                              "Are you sure you want to remove this item?",
+                          textConfirm: "Yes",
+                          textCancel: "No",
+                          confirmTextColor: Colors.white,
+                          onConfirm: () {
+                            cartController.removeFromCart(item);
+                            Get.back();
+                          },
+                          onCancel: () {},
+                        );
+                      },
                       icon: Icon(Icons.remove_circle_outline),
                     ),
                   );
@@ -33,7 +47,7 @@ class CartView extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Total: \$${cartController.totalAmount.value.toStringAsFixed(2)}',
+                'Total: \$${cartController.totalAmount.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 24),
               ),
             );

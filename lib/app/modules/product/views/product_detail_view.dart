@@ -4,12 +4,11 @@ import 'package:getx_flutter/app/modules/product/controllers/cart_controller.dar
 import 'package:getx_flutter/app/modules/product/models/product_model.dart';
 
 class ProductDetailView extends StatelessWidget {
-  const ProductDetailView({super.key});
-
+  final CartController cartController = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     final ProductModel product = Get.arguments;
-    final CartController cartController = Get.find<CartController>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Product Details"),
@@ -27,7 +26,7 @@ class ProductDetailView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              product.name,
+              product.title,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
@@ -38,10 +37,43 @@ class ProductDetailView extends StatelessWidget {
                 cartController.addToCart(product);
                 Get.snackbar(
                   "Added to cart",
-                  '${product.name} added to your cart',
+                  '${product.title} added to your cart',
+                  snackPosition: SnackPosition.BOTTOM,
+                  duration: Duration(seconds: 2),
+                  backgroundColor: Colors.amber,
+                  colorText: Colors.white,
                 );
               },
               child: Text("Add to Cart"),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Get.bottomSheet(
+                  Container(
+                    color: Colors.white,
+                    child: Wrap(
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.shopping_cart),
+                          title: Text("View Cart"),
+                          onTap: () {
+                            Get.toNamed('/cart');
+                          },
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.payment),
+                          title: Text("Proceed to Checkout"),
+                          onTap: () {
+                            Get.toNamed('/checkout');
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              child: Text("More Actions"),
             ),
           ],
         ),

@@ -47,7 +47,7 @@ class CartView extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Total: \$${cartController.totalAmount.toStringAsFixed(2)}',
+                'total \$${cartController.totalAmount.toStringAsFixed(2)}',
                 style: TextStyle(fontSize: 24),
               ),
             );

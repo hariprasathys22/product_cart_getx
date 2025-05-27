@@ -11,7 +11,7 @@ class ProductDetailView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Product Details"),
+        title: Text('product_details'.tr),
         actions: [
           IconButton(
             onPressed: () {
@@ -44,7 +44,7 @@ class ProductDetailView extends StatelessWidget {
                   colorText: Colors.white,
                 );
               },
-              child: Text("Add to Cart"),
+              child: Text('add_to_cart'.tr),
             ),
             SizedBox(height: 20),
             ElevatedButton(
